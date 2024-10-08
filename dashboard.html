@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress Page</title>
+    <link rel="icon" href="favicon-32x32.png" type="image/x-icon">
+
+    <style>
+        /* Existing styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+            font-size: 48px;
+            margin-bottom: 40px;
+            letter-spacing: 2px;
+        }
+
+        .team-container {
+            background-color: #1e1e1e;
+            padding: 25px;
+            border-radius: 20px;
+            border: 1px solid #333;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .team-container:hover {
+            transform: translateY(-10px);
+        }
+
+        .team-members {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .member {
+            text-align: center;
+            background-color: #2a2a2a;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .member:hover {
+            box-shadow: 0 8px 20px white;
+        }
+
+        .member img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid white;
+            margin-bottom: 10px;
+        }
+
+        h2, h3 {
+            margin: 10px 0;
+            color: white;
+        }
+
+        p {
+            color: #bdbdbd;
+        }
+
+        .progress-container {
+            background-color: #333;
+            border-radius: 25px;
+            margin-top: 10px;
+            position: relative;
+            height: 30px;
+            width: 100%;
+        }
+
+        .progress-bar {
+            height: 100%;
+            border-radius: 25px;
+            background-color: white;
+            color: black;
+            text-align: center;
+            line-height: 30px;
+            font-size: 14px;
+        }
+
+        .task-list {
+            text-align: left;
+            margin-top: 10px;
+            color: #e0e0e0;
+        }
+
+        .task-list ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        .task-list li {
+            margin-bottom: 5px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 12px 30px;
+            background-color: grey;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px white;
+        }
+
+        button:hover {
+            background-color: black;
+            box-shadow: 0 6px 20px white;
+        }
+
+        button a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .calendar {
+            margin-top: 40px;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .calendar th, .calendar td {
+            border: 1px solid #333;
+            padding: 15px;
+            text-align: center;
+            width: 14.28%;
+            vertical-align: top;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .calendar th {
+            background-color: #2a2a2a;
+        }
+
+        .calendar td {
+            min-height: 100px;
+        }
+
+        .complete {
+            background-color: #00e676;
+            color: black;
+        }
+
+        .in-progress {
+            background-color: #ffeb3b;
+            color: black;
+        }
+
+        .not-started {
+            background-color: #f44336;
+            color: white;
+        }
+
+        /* Additional styles for better visibility */
+        .complete-task {
+            margin-top: 10px;
+            padding: 5px 10px;
+            font-size: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #2196F3;
+            color: white;
+        }
+
+        .complete-task:hover {
+            background-color: #0b7dda;
+        }
+
+        /* Responsive Calendar */
+        @media (max-width: 600px) {
+            .calendar th, .calendar td {
+                padding: 10px;
+            }
+            .complete-task {
+                padding: 3px 6px;
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Team Progress Overview</h1>
+    <div class="team-container">
+        <div class="team-members">
+            <!-- Team members' content -->
+            <div class="member">
+                <img src="https://cdn2.vectorstock.com/i/1000x1000/26/06/young-executive-woman-profile-icon-vector-9692606.jpg" >
+                <h3>Aditi</h3>
+                <p>Team Leader</p>
+                <div class="progress-container">
+                    <div class="progress-bar" style="width: 70%;">67.5%</div>
+                </div>
+                <div class="task-list">
+                    <h4>Tasks Completed:</h4>
+                    <ul>
+                        <li>Conducted weekly team meetings</li>
+                        <li>Managed project timelines</li>
+                        <li>Oversaw deployment schedule</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="member">
+                <img src="https://th.bing.com/th?id=OIP.SJcycEiCnXZ6_AePYM_EZQHaHa&w=250&h=250&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2" >
+                <h3>Aaryaman</h3>
+                <p>Backend Developer</p>
+                <div class="progress-container">
+                    <div class="progress-bar" style="width: 90%;">75%</div>
+                </div>
+                <div class="task-list">
+                    <h4>Tasks Completed:</h4>
+                    <ul>
+                        <li>Designed database schema</li>
+                        <li>Developed API for user authentication</li>
+                        <li>Integrated third-party services</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="member">
+                <img src="https://th.bing.com/th?id=OIP.28jmE4s4hgzuaJnqvGffRQHaHa&w=250&h=250&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2" >
+                <h3>Mohit</h3>
+                <p>Frontend Developer</p>
+                <div class="progress-container">
+                    <div class="progress-bar" style="width: 50%;">60%</div>
+                </div>
+                <div class="task-list">
+                    <h4>Tasks Completed:</h4>
+                    <ul>
+                        <li>Designed UI mockups</li>
+                        <li>Implemented responsive layouts</li>
+                        <li>Fixed bugs in navigation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calendar Section -->
+        <h2>Task Calendar</h2>
+        <table class="calendar" id="calendar">
+            <thead>
+                <tr>
+                    <th>Sun</th>
+                    <th>Mon</th>
+                    <th>Tue</th>
+                    <th>Wed</th>
+                    <th>Thu</th>
+                    <th>Fri</th>
+                    <th>Sat</th>
+                </tr>
+            </thead>
+            <tbody id="calendar-body">
+                <!-- Calendar cells will be generated here -->
+            </tbody>
+        </table>
+
+        <div class="button-container">
+            <button><a href="extra.html">MOVE BACK</a></button>&nbsp;&nbsp;&nbsp;
+            <button><a href="index.html">LOG OUT</a></button>&nbsp;&nbsp;&nbsp;
+            <button id="reset-tasks">RESET TASKS</button>
+        </div>
+        
+    </div>
+
+    <script>
+
+let taskDates = JSON.parse(localStorage.getItem('taskDates')) || {};
+
+function saveTasks() {
+    localStorage.setItem('taskDates', JSON.stringify(taskDates));
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const calendarBody = document.getElementById('calendar-body');
+
+    function generateCalendar() {
+        const year = new Date().getFullYear();
+        const month = new Date().getMonth();
+        const firstDay = new Date(year, month, 1).getDay();
+        const lastDate = new Date(year, month + 1, 0).getDate();
+        let date = 1;
+
+        calendarBody.innerHTML = '';
+
+        for (let i = 0; i < 6; i++) {
+            let row = document.createElement('tr');
+
+            for (let j = 0; j < 7; j++) {
+                let cell = document.createElement('td');
+
+                if (i === 0 && j < firstDay) {
+                    row.appendChild(cell);
+                } else if (date > lastDate) {
+                    break;
+                } else {
+                    const cellDate = `${year}-${month + 1}-${date}`;
+                    cell.setAttribute('data-date', cellDate);
+
+                    // Check task status for each day
+                    const taskInfo = taskDates[cellDate] || [];
+                    cell.innerHTML = date;
+
+                    // Display tasks (if any) for that day and show task completion status
+                    if (taskInfo.length > 0) {
+                        const allTasksComplete = taskInfo.every(task => task.status === 'complete');
+
+                        // Color the day based on task completion status
+                        if (allTasksComplete) {
+                            cell.style.backgroundColor = 'green';
+                        } else {
+                            cell.style.backgroundColor = 'red';
+                        }
+
+                        // Append task list to the cell
+                        const taskList = document.createElement('ul');
+                        taskInfo.forEach((task, index) => {
+                            let taskItem = document.createElement('li');
+                            taskItem.textContent = task.task + (task.status === 'complete' ? ' (Complete)' : ' (In Progress)');
+
+                            // Only create button if task is not complete
+                            if (task.status !== 'complete') {
+                                const completeTaskBtn = document.createElement('button');
+                                completeTaskBtn.innerText = '✓'; // Smaller mark complete icon
+                                completeTaskBtn.style.fontSize = '12px'; // Smaller font size
+                                completeTaskBtn.style.marginLeft = '10px'; // Spacing
+                                completeTaskBtn.style.backgroundColor = 'black'; // Button background color
+                                completeTaskBtn.style.color = 'white'; // Text color for the button
+                                completeTaskBtn.style.border = '1px solid black'; // Button border
+                                completeTaskBtn.style.borderRadius = '5px'; // Rounded corners
+                                completeTaskBtn.style.cursor = 'pointer'; // Pointer cursor on hover
+                                completeTaskBtn.addEventListener('click', () => {
+                                    markTaskComplete(cellDate, index);
+                                    completeTaskBtn.remove(); // Remove button after marking complete
+                                });
+                                taskItem.appendChild(completeTaskBtn);
+                            }
+                            
+                            taskList.appendChild(taskItem);
+                        });
+                        cell.appendChild(taskList);
+                    }
+
+                    // Add click event to the cell to prompt for adding tasks
+                    cell.addEventListener('click', () => {
+                        let task = prompt(`Add a new task for ${cellDate}:`);
+                        if (task) {
+                            addTask(cellDate, task);
+                        }
+                    });
+
+                    row.appendChild(cell);
+                    date++;
+                }
+            }
+            calendarBody.appendChild(row);
+        }
+    }
+
+    function addTask(date, task) {
+        let taskInfo = taskDates[date] || [];
+        taskInfo.push({ task: task.trim(), status: 'in-progress' });
+        taskDates[date] = taskInfo;
+        saveTasks();
+        generateCalendar();
+    }
+
+    function markTaskComplete(date, taskIndex) {
+        if (taskDates[date] && taskDates[date][taskIndex]) {
+            taskDates[date][taskIndex].status = 'complete'; // Mark the specific task as complete
+            saveTasks();
+            generateCalendar(); // Refresh the calendar to update the color
+        }
+    }
+    document.getElementById('reset-tasks').addEventListener('click', function () {
+    // Clear taskDates from localStorage
+    localStorage.removeItem('taskDates');
+    
+    // Reset the taskDates object in JavaScript
+    taskDates = {};
+    
+    // Regenerate the calendar to reflect the reset
+    generateCalendar();
+    
+    // Optionally show a message to the user
+    alert("All tasks have been reset!");
+});
+
+    generateCalendar();
+});
+
+
+
+    </script>
+</body>
+</html>

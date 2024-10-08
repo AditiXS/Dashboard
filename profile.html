@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile-Employees</title>
+    <link rel="icon" href="favicon-32x32.png" type="image/x-icon">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: black;
+            color: wheat;
+            padding: 20px;
+            display: flex;
+            justify-content: flex-start; /* Align content to the left */
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background-color: grey;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .profile-header img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 4px solid white;
+        }
+
+        .profile-header h2 {
+            font-size: 28px;
+        }
+
+        .details-section {
+            margin-bottom: 20px;
+        }
+
+        .details-section h3 {
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .details-section p {
+            margin-bottom: 5px;
+        }
+
+        .back-button {
+            display: inline-block;
+            background-color: grey;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .back-button:hover {
+            background-color: black;
+        }
+
+        /* New Calendar and Attendance Styles */
+        .attendance-container {
+            background-color: grey;
+            padding: 20px;
+            border-radius: 8px;
+            width: 500px; /* Increased width */
+            margin-left: 400px; /* Shift slightly left */
+        }
+
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr); /* Keep 7 columns */
+            gap: 5px;
+            margin-bottom: 20px;
+        }
+
+        .calendar div {
+            padding: 15px;
+            background-color: white;
+            color: black;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .calendar div.present {
+            background-color: green;
+            color: white;
+        }
+
+        .calendar div.absent {
+            background-color: red;
+            color: white;
+        }
+
+        .calendar div.leave {
+            background-color: yellow;
+            color: black;
+        }
+
+        .attendance-options {
+            display: none;
+            margin-bottom: 10px;
+        }
+
+        .attendance-options button {
+            padding: 10px 20px;
+            margin-right: 10px;
+            background-color: white;
+            color: black;
+            border: 1px solid white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .attendance-options button:hover {
+            background-color: black;
+            color: white;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            margin-top: 20px;
+        }
+
+        .progress-bar {
+            width: 100%; /* Increase width to 100% */
+            background-color: black;
+            border-radius: 8px;
+            margin-left: 10px; /* Move it slightly to the right */
+        }
+
+        .progress-bar-inner {
+            height: 30px;
+            background-color: green;
+            width: 0%;
+            text-align: center;
+            color: white;
+            border-radius: 8px;
+            line-height: 30px;
+        }
+
+        /* Attendance Summary */
+        .attendance-summary {
+            margin-top: 10px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Existing Profile Content -->
+    <div>
+        <div class="profile-header">
+            <img src="https://cdn2.vectorstock.com/i/1000x1000/26/06/young-executive-woman-profile-icon-vector-9692606.jpg" alt="Aditi Saini">
+            <h2>Aditi Saini</h2>
+        </div>
+
+        <div class="details-section">
+            <h3>Personal Details</h3>
+            <p><strong>Nationality:</strong> Indian</p>
+            <p><strong>Date of Birth:</strong> January 15, 1990</p>
+            <p><strong>Address:</strong> 1234 Imaginative Street, Chandigarh</p>
+        </div>
+
+        <div class="details-section">
+            <h3>Financial Details</h3>
+            <p><strong>Salary:</strong> INR.7,00,000 per year</p>
+            <p><strong>Bonuses:</strong> INR.5,000</p>
+            <p><strong>Tax Deductions:</strong> INR.2,000</p>
+        </div>
+
+        <div class="details-section">
+            <h3>Family Details</h3>
+            <p><strong>Spouse:</strong> Unmarried</p>
+            <p><strong>Children:</strong> None</p>
+        </div>
+
+        <div class="details-section">
+            <h3>Attendance & Accomplishments</h3>
+            <p><strong>Attendance:</strong> 95%</p>
+            <p><strong>Accomplishments:</strong> Employee of the Month (September 2024), Lead on Project XYZ</p>
+        </div>
+
+        <a href="employee_dashboard.html" class="back-button">Back to Dashboard</a>
+    </div>
+
+    <!-- New Attendance and Calendar Section -->
+    <div class="attendance-container">
+        <h3>Mark Attendance</h3>
+        <div class="calendar" id="calendar"></div>
+        <div class="attendance-options" id="attendance-options">
+            <button onclick="markAttendance('Present')">Present</button>
+            <button onclick="markAttendance('Absent')">Absent</button>
+            <button onclick="markAttendance('Leave')">Leave</button>
+        </div>
+        <p id="selected-date"></p>
+
+        <!-- Progress Bar for Attendance -->
+        <div class="progress-container">
+            <h4>Attendance Percentage</h4>
+            <div class="progress-bar">
+                <div id="progress-bar-inner" class="progress-bar-inner">0%</div>
+            </div>
+        </div>
+
+        <!-- Attendance Summary Section -->
+        <div class="attendance-summary">
+            <p><strong>Present:</strong> <span id="present-count">0</span></p>
+            <p><strong>Absent:</strong> <span id="absent-count">0</span></p>
+            <p><strong>Leave:</strong> <span id="leave-count">0</span></p>
+        </div>
+    </div>
+
+    <script>
+        const calendar = document.getElementById('calendar');
+        const attendanceOptions = document.getElementById('attendance-options');
+        const selectedDateElement = document.getElementById('selected-date');
+        const progressBarInner = document.getElementById('progress-bar-inner');
+        const presentCountElement = document.getElementById('present-count');
+        const absentCountElement = document.getElementById('absent-count');
+        const leaveCountElement = document.getElementById('leave-count');
+        
+        let selectedDate = null;
+        let attendanceData = {};
+        const totalDays = 31;
+
+        // Load attendance data from localStorage on page load
+        window.onload = () => {
+            const storedData = localStorage.getItem('attendanceData');
+            if (storedData) {
+                attendanceData = JSON.parse(storedData);
+            }
+            generateCalendar();
+            loadAttendanceData(); // Load attendance data after generating the calendar
+        };
+
+        // Generate the calendar dynamically (31 days)
+        function generateCalendar() {
+            calendar.innerHTML = ''; // Clear existing calendar
+
+            for (let day = 1; day <= totalDays; day++) {
+                const dateElement = document.createElement('div');
+                dateElement.textContent = day;
+                dateElement.addEventListener('click', () => selectDate(day, dateElement));
+                calendar.appendChild(dateElement);
+            }
+        }
+
+        // Function to select a date
+        function selectDate(day, dateElement) {
+            selectedDate = day;
+            selectedDateElement.textContent = `Selected Date: ${day}`;
+            attendanceOptions.style.display = 'block'; // Show attendance options
+        }
+
+        // Function to mark attendance
+        function markAttendance(status) {
+            if (selectedDate) {
+                const selectedDateElement = calendar.querySelector(`div:nth-child(${selectedDate})`);
+
+                // Remove previous status classes
+                selectedDateElement.classList.remove('present', 'absent', 'leave');
+
+                // Apply new status
+                attendanceData[selectedDate] = status;
+                if (status === 'Present') {
+                    selectedDateElement.classList.add('present');
+                } else if (status === 'Absent') {
+                    selectedDateElement.classList.add('absent');
+                } else if (status === 'Leave') {
+                    selectedDateElement.classList.add('leave');
+                }
+
+                // Save attendance data to localStorage
+                localStorage.setItem('attendanceData', JSON.stringify(attendanceData));
+
+                // Update attendance percentage and counts
+                updateAttendance();
+
+                attendanceOptions.style.display = 'none'; // Hide options after selection
+                selectedDateElement.textContent = '';
+                selectedDate = null;
+            }
+        }
+
+        // Load attendance data to the calendar
+        function loadAttendanceData() {
+            for (let day in attendanceData) {
+                const status = attendanceData[day];
+                const dateElement = calendar.querySelector(`div:nth-child(${day})`);
+                if (dateElement) {
+                    dateElement.classList.add(status.toLowerCase());
+                }
+            }
+            updateAttendance(); // Update the attendance summary
+        }
+
+        // Update the progress bar for attendance percentage and counts
+        function updateAttendance() {
+            const presentDays = Object.values(attendanceData).filter(status => status === 'Present').length;
+            const absentDays = Object.values(attendanceData).filter(status => status === 'Absent').length;
+            const leaveDays = Object.values(attendanceData).filter(status => status === 'Leave').length;
+
+            const percentage = (presentDays / totalDays) * 100;
+
+            progressBarInner.style.width = `${percentage}%`;
+            progressBarInner.textContent = `${Math.round(percentage)}%`;
+
+            // Update counts
+            presentCountElement.textContent = presentDays;
+            absentCountElement.textContent = absentDays;
+            leaveCountElement.textContent = leaveDays;
+        }
+        
+    </script>
+
+</body>
+</html>
